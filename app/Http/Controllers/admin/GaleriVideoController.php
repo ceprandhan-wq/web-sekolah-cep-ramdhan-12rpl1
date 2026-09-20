@@ -31,7 +31,8 @@ class GaleriVideoController extends Controller
         $galeri_video->fill($request->safe()->except('thumbnail'));
 
         if ($request->hasFile('thumbnail')) {
-            if ($galeri_video->thumbnail && !Star::startsWith($galeri_video->thumbnail, 'http')) {
+            // ⬅️ DIUBAH: Star::startsWith -> str_starts_with (class Star tidak ada)
+            if ($galeri_video->thumbnail && !str_starts_with($galeri_video->thumbnail, 'http')) {
                 Storage::disk('public')->delete('images/video/'.$galeri_video->thumbnail);
             }
             $filename = $request->file('thumbnail')->hashName();

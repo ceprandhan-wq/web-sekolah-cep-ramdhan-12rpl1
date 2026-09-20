@@ -54,7 +54,8 @@ class BerandaController extends Controller
         $jumlahSiswa = $beranda->jumlah_siswa ?? 0;
         $jumlahGuru  = $beranda->jumlah_guru ?? 0;
 
-        return view('dashboard', compact(
+        // ⬅️ DIUBAH: 'dashboard' -> 'home.dashboard'
+        return view('home.dashboard', compact(
             'profil',
             'kepalaSekolah',
             'sambutanKepsek',

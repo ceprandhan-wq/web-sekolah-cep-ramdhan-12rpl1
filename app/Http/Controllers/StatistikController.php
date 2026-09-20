@@ -17,8 +17,8 @@ class StatistikController extends Controller
         $validated = $request->validate([
             'jumlah_siswa'    => 'required|integer|min:0',
             'jumlah_guru'     => 'required|integer|min:0',
-            'jumlah_alumni'   => 'required|integer|min:0',
-            'jumlah_prestasi' => 'required|integer|min:0',
+            'jumlah_alumni'   => 'nullable|integer|min:0',    // ⬅️ DIUBAH: required -> nullable
+            'jumlah_prestasi' => 'nullable|integer|min:0',    // ⬅️ DIUBAH: required -> nullable
         ]);
 
         $statistik = Statistik::first() ?? new Statistik();

@@ -30,6 +30,7 @@
     'artikel'   => 'Artikel',
     'agenda'    => 'Agenda',
     'prestasi'  => 'Prestasi',
+    'kontak'    => 'Kontak',
 ];
 
    $tabIcons = [
@@ -46,6 +47,7 @@
     'artikel'      => '📰',
     'agenda'       => '🗓️',
     'prestasi'     => '🏆',
+   'kontak'       => '📞',
 ];
 @endphp
 
@@ -316,6 +318,72 @@
         </div>
       </div>
       <small>Angka ini yang ditampilkan di kartu "Statistik Sekolah" pada halaman Beranda.</small>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn primary">💾 Simpan Perubahan</button>
+    </div>
+  </form>
+</section>
+{{-- =====================================================
+     TAB: KONTAK
+====================================================== --}}
+<section class="admin-section {{ $activeTab === 'kontak' ? 'active' : '' }}" data-section="kontak">
+  <form method="POST" action="{{ route('admin.kontak.update') }}">
+    @csrf
+    @method('PUT')
+
+    <div class="panel">
+      <h3 class="panel-title">📞 Informasi Kontak</h3>
+      <div class="grid-2">
+        <div class="field full">
+          <label>Alamat</label>
+          <textarea name="alamat" rows="2">{{ old('alamat', $kontak->alamat ?? '') }}</textarea>
+        </div>
+        <div class="field">
+          <label>Telepon</label>
+          <input type="tel" name="telepon" value="{{ old('telepon', $kontak->telepon ?? '') }}">
+        </div>
+        <div class="field">
+          <label>WhatsApp</label>
+          <input type="text" name="whatsapp" value="{{ old('whatsapp', $kontak->whatsapp ?? '') }}" placeholder="6285641826589">
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" name="email" value="{{ old('email', $kontak->email ?? '') }}">
+        </div>
+        <div class="field">
+          <label>Website</label>
+          <input type="text" name="website" value="{{ old('website', $kontak->website ?? '') }}" placeholder="smkn1cijati.sch.id">
+        </div>
+        <div class="field full">
+          <label>Jam Operasional</label>
+          <input type="text" name="jam_operasional" value="{{ old('jam_operasional', $kontak->jam_operasional ?? '') }}" placeholder="Senin - Jumat, 07.00 - 15.00 WIB">
+        </div>
+        <div class="field full">
+          <label>URL Embed Google Maps</label>
+          <input type="url" name="maps_embed" value="{{ old('maps_embed', $kontak->maps_embed ?? '') }}" placeholder="https://www.google.com/maps/embed?pb=...">
+          <small>Di Google Maps: Bagikan → Sematkan peta → salin isi atribut <code>src</code> saja.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-title">🌐 Media Sosial</h3>
+      <div class="grid-2">
+        <div class="field full">
+          <label>Facebook</label>
+          <input type="url" name="facebook" value="{{ old('facebook', $kontak->facebook ?? '') }}">
+        </div>
+        <div class="field full">
+          <label>Instagram</label>
+          <input type="url" name="instagram" value="{{ old('instagram', $kontak->instagram ?? '') }}">
+        </div>
+        <div class="field full">
+          <label>YouTube</label>
+          <input type="url" name="youtube" value="{{ old('youtube', $kontak->youtube ?? '') }}">
+        </div>
+      </div>
     </div>
 
     <div class="actions">

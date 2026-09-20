@@ -33,7 +33,7 @@ Route::get('/', function () {
 
     $sambutanKepsek = $kepalaSekolah->sambutan ?? null;
 
-    return view('dashboard', compact(
+    return view('home/dashboard', compact(
         'profil', 'beranda', 'jurusan', 'guru', 'ekskul', 'galeri', 'berita', 'agenda',
         'komite', 'notifikasi', 'kepalaSekolah', 'sambutanKepsek'
     ));

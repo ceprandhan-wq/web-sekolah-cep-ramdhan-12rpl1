@@ -22,6 +22,16 @@ class AdminController extends Controller
             ? \App\Models\Beranda::first()
             : null;
 
+        // ⬅️ BARU: dipakai tab "Sambutan Kepala Sekolah" di admin.admin
+        $kepalaSekolah = class_exists(\App\Models\KepalaSekolah::class)
+            ? \App\Models\KepalaSekolah::first()
+            : null;
+
+        // ⬅️ BARU: dipakai tab "Statistik Sekolah" di admin.admin
+        $statistik = class_exists(\App\Models\Statistik::class)
+            ? \App\Models\Statistik::first()
+            : null;
+
         $jurusan = class_exists(\App\Models\Jurusan::class)
             ? \App\Models\Jurusan::all()
             : collect();
@@ -53,6 +63,10 @@ class AdminController extends Controller
         $prestasi = class_exists(\App\Models\Prestasi::class)
             ? \App\Models\Prestasi::all()
             : collect();
+            
+                    $kontak = class_exists(\App\Models\Kontak::class)
+            ? \App\Models\Kontak::first()
+            : null;
 
         // BARU: data seragam sekolah — dipakai di tab "Seragam" panel admin.
         $seragam = class_exists(\App\Models\Seragam::class)
@@ -62,8 +76,9 @@ class AdminController extends Controller
         // Dipakai untuk dropdown "Jurusan" di form Tambah/Edit Guru.
         $jurusanList = $jurusan;
 
-               return view('admin.admin', compact(
-            'profil', 'beranda', 'jurusan', 'guru', 'ekskul', 'galeriVideo',
+        // ⬅️ DIUBAH: ditambah 'kepalaSekolah' dan 'statistik'
+        return view('admin.admin', compact(
+            'profil', 'beranda', 'kepalaSekolah', 'statistik', 'jurusan', 'guru', 'ekskul', 'galeriVideo',
             'artikel', 'agenda', 'fasilitas', 'prestasi', 'jurusanList', 'seragam'
         ));
     }

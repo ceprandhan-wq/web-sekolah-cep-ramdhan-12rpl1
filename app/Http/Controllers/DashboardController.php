@@ -25,7 +25,11 @@ class DashboardController extends Controller
         $artikel = Artikel::latest()->take(4)->get(); // blade ->take(3) sendiri di halaman beranda
         $agenda  = Agenda::orderBy('tanggal')->take(5)->get();
         $jurusan = Jurusan::all();
-        $guru    = Guru::all();
+        $guru    = Guru::with('jurusan')->get(); // ⬅️ DIUBAH: eager load relasi jurusan
+
+        // ⬅️ BARU: variabel ini ada di compact() tetapi sebelumnya tidak pernah dibuat (error Undefined variable)
+        $berita     = $artikel;
+        $notifikasi = null;
 
         // Catatan: dashboard.blade.php TIDAK memakai variabel ini untuk daftar ekskul
         // (blade pakai array hardcode $daftarEkskul). Tetap dikirim untuk jaga-jaga
@@ -39,7 +43,8 @@ class DashboardController extends Controller
         // — dipakai blade untuk section "Galeri Video"
         $galeriVideo = GaleriVideo::latest()->take(6)->get();
 
-        return view('dashboard', compact(
+        // ⬅️ DIUBAH: 'dashboard' -> 'home.dashboard'
+        return view('home.dashboard', compact(
             'profil',
             'notifikasi',
             'kepalaSekolah',

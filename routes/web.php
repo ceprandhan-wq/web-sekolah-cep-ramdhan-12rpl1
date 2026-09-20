@@ -19,10 +19,12 @@ use App\Http\Controllers\Admin\StatistikController; // ⬅️ BARU (Statistik Se
 use App\Http\Controllers\Admin\KepalaSekolahController as AdminKepalaSekolahController; // ⬅️ BARU (alias biar tidak bentrok nama)
 use App\Http\Controllers\Admin\SeragamController;
 use App\Http\Controllers\KepalaSekolahController; // ⬅️ BARU (versi publik)
+use App\Http\Controllers\Admin\KontakController as AdminKontakController;
 
 use App\Http\Controllers\Auth\AdminMagicLoginController;
 use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\JurusanPublicController;
+use App\Http\Controllers\KontakController;
 
 use App\Models\Profil;
 use App\Models\Jurusan;
@@ -78,7 +80,11 @@ Route::get('/', function () {
         ? \App\Models\Seragam::orderBy('urutan')->get()
         : collect();
 
-    return view('dashboard', compact(
+    // Kontak sekolah - dipakai di section "kontak" di beranda, supaya data yang duplikat diinput admin (tab kontak) muncul di halaman public
+     $kontak = (new KontakController)->data();
+
+    // ⬅️ DIUBAH: 'dashboard' -> 'home.dashboard' (file dipindah ke resources/views/home/dashboard.blade.php)
+    return view('home.dashboard', compact(
         'profil', 'beranda', 'statistik', 'jurusan', 'guru', 'ekskul', 'galeriVideo', 'artikel', 'artikelBeranda',
         'agenda', 'fasilitas', 'prestasi', 'kepalaSekolah', 'sambutanKepsek', 'seragam'
     ));
@@ -190,4 +196,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'level:admin'])->gro
     Route::post('/prestasi', [PrestasiController::class, 'store'])->name('prestasi.store');
     Route::put('/prestasi/{prestasi}', [PrestasiController::class, 'update'])->name('prestasi.update');
     Route::delete('/prestasi/{prestasi}', [PrestasiController::class, 'destroy'])->name('prestasi.destroy');
+
+        // ---- Kontak (data tunggal) ----
+    Route::put('/kontak', [AdminKontakController::class, 'update'])->name('kontak.update');
 });

@@ -5,10 +5,8 @@ namespace Database\Factories;
 use App\Models\Artikel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<Berita>
- */
-class BeritaFactory extends Factory
+
+class ArtikelFactory extends Factory
 {
     protected $model = Artikel::class;
 

@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             GaleriVideoSeeder::class,
             ProfilSeeder::class,
             kepalasekolahSeeder::class,
+            KontakSeeder::class,
         ]);
     }
 }

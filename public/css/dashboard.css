@@ -2818,3 +2818,43 @@
 @media (max-width:560px){
   .pv-ekskul-grid{grid-template-columns:repeat(2,1fr);}
 }
+/* ===== NAVBAR STICKY (transparan di atas, putih saat scroll) ===== */
+.pv-hero-pill{
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  z-index: 1000 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  transition: background .3s ease, box-shadow .3s ease, padding .3s ease;
+}
+
+/* teks saat di atas (putih) */
+.pv-hero-pill .menu-item,
+.pv-hero-pill .pv-hero-pill-brand-text .name,
+.pv-hero-pill .pv-hero-pill-brand-text .tagline{
+  color: #fff !important;
+  transition: color .3s ease;
+}
+
+/* saat di-scroll: putih solid */
+.pv-hero-pill.is-scrolled{
+  background: #fff !important;
+  box-shadow: 0 2px 14px rgba(15, 35, 60, .12) !important;
+}
+.pv-hero-pill.is-scrolled .menu-item,
+.pv-hero-pill.is-scrolled .pv-hero-pill-brand-text .name{
+  color: #1f2937 !important;
+}
+.pv-hero-pill.is-scrolled .pv-hero-pill-brand-text .tagline{
+  color: #6b7280 !important;
+}
+.pv-hero-pill.is-scrolled .menu-item:hover,
+.pv-hero-pill.is-scrolled .menu-item.active{
+  color: #0f6fd1 !important;
+}

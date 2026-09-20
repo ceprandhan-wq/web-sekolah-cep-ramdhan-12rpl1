@@ -160,8 +160,8 @@
           @endphp
 
          <div class="nav-dropdown" id="navDropdownJurusan">
-  <a class="menu-item dropdown-toggle" data-page="jurusan" href="#">
-    kompeensi keahlian
+ <a class="menu-item dropdown-toggle" data-page="jurusan" href="#">
+    Kompetensi Keahlian
     <span class="dropdown-caret">▾</span>
   </a>
  <div class="nav-dropdown-menu-simple">
@@ -178,7 +178,7 @@
           <a class="menu-item" data-page="pasilitas">Fasilitas</a>
           <a class="menu-item" data-page="guru">Guru & Staff</a>
           <a class="menu-item" data-page="ekstrakurikuler">Ekstrakurikuler</a>
-           <a class="menu-item" data-page="Kontak">Kontak</a>
+          <a class="menu-item" data-page="kontak" href="#">Kontak</a>
         </nav>
       </div>
 
@@ -845,8 +845,21 @@
 </div>
         </div>
       </section>
-      <!-- ============ PAGE: KONTAK ============ -->
+          <!-- ============ PAGE: KONTAK ============ -->
       <section class="page" id="page-kontak">
+        @php
+          $alamatK    = $kontak->alamat    ?? $profil->alamat  ?? null;
+          $teleponK   = $kontak->telepon   ?? $profil->telepon ?? null;
+          $emailK     = $kontak->email     ?? $profil->email   ?? null;
+          $websiteK   = $kontak->website   ?? $profil->website ?? null;
+          $whatsappK  = $kontak->whatsapp  ?? '6285641826589';
+          $jamK       = $kontak->jam_operasional ?? null;
+          $mapsK      = $kontak->maps_embed ?? null;
+          $facebookK  = $kontak->facebook  ?? 'https://www.facebook.com/smkn1cijatiofficial-106581810689075';
+          $instagramK = $kontak->instagram ?? 'https://www.instagram.com/smkn1cijatiofficial/';
+          $youtubeK   = $kontak->youtube   ?? 'https://www.youtube.com/@smkn1cijatiofficial';
+        @endphp
+
         <div class="page-head">
           <div class="eyebrow">Hubungi Kami</div>
           <h1>Kontak</h1>
@@ -858,13 +871,23 @@
           <div class="kontak-grid">
             <div class="kontak-item">
               <div class="kontak-label">Alamat</div>
-              <div class="kontak-value">{{ $profil->alamat ?? '-' }}</div>
+              <div class="kontak-value">{{ $alamatK ?: '-' }}</div>
             </div>
             <div class="kontak-item">
               <div class="kontak-label">Telepon</div>
               <div class="kontak-value">
-                @if($profil->telepon ?? false)
-                  <a href="tel:{{ $profil->telepon }}">{{ $profil->telepon }}</a>
+                @if($teleponK)
+                  <a href="tel:{{ $teleponK }}">{{ $teleponK }}</a>
+                @else
+                  -
+                @endif
+              </div>
+            </div>
+            <div class="kontak-item">
+              <div class="kontak-label">WhatsApp</div>
+              <div class="kontak-value">
+                @if($whatsappK)
+                  <a href="https://wa.me/{{ $whatsappK }}" target="_blank" rel="noopener noreferrer">wa.me/{{ $whatsappK }}</a>
                 @else
                   -
                 @endif
@@ -873,8 +896,8 @@
             <div class="kontak-item">
               <div class="kontak-label">Email</div>
               <div class="kontak-value">
-                @if($profil->email ?? false)
-                  <a href="mailto:{{ $profil->email }}">{{ $profil->email }}</a>
+                @if($emailK)
+                  <a href="mailto:{{ $emailK }}">{{ $emailK }}</a>
                 @else
                   -
                 @endif
@@ -883,26 +906,36 @@
             <div class="kontak-item">
               <div class="kontak-label">Website</div>
               <div class="kontak-value">
-                @if($profil->website ?? false)
-                  <a href="https://{{ $profil->website }}" target="_blank" rel="noopener noreferrer">{{ $profil->website }}</a>
+                @if($websiteK)
+                  <a href="https://{{ preg_replace('#^https?://#', '', $websiteK) }}" target="_blank" rel="noopener noreferrer">{{ $websiteK }}</a>
                 @else
                   -
                 @endif
               </div>
             </div>
             <div class="kontak-item">
+              <div class="kontak-label">Jam Operasional</div>
+              <div class="kontak-value">{{ $jamK ?: '-' }}</div>
+            </div>
+            <div class="kontak-item">
               <div class="kontak-label">Media Sosial</div>
               <div class="kontak-value kontak-sosmed">
-                <a href="https://www.facebook.com/smkn1cijatiofficial-106581810689075" target="_blank" rel="noopener noreferrer">Facebook</a>
-                <a href="https://www.instagram.com/smkn1cijatiofficial/" target="_blank" rel="noopener noreferrer">Instagram</a>
-                <a href="https://www.youtube.com/@smkn1cijatiofficial" target="_blank" rel="noopener noreferrer">YouTube</a>
+                @if($facebookK)<a href="{{ $facebookK }}" target="_blank" rel="noopener noreferrer">Facebook</a>@endif
+                @if($instagramK)<a href="{{ $instagramK }}" target="_blank" rel="noopener noreferrer">Instagram</a>@endif
+                @if($youtubeK)<a href="{{ $youtubeK }}" target="_blank" rel="noopener noreferrer">YouTube</a>@endif
               </div>
             </div>
           </div>
         </div>
-      </section>
 
-    </div>
+        @if($mapsK)
+          <div class="panel" style="margin-top:20px;">
+            <h3>Lokasi Sekolah</h3>
+            <iframe src="{{ $mapsK }}" width="100%" height="380" style="border:0;border-radius:12px;"
+                    allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        @endif
+      </section>
 
   <!-- ============ FOOTER (gaya 4 kolom, mirip SMKN 2 Bandung) ============ -->
 <footer class="pv-footer-dark">

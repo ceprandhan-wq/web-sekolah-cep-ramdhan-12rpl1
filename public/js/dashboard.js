@@ -1318,3 +1318,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+// Navbar: transparan di atas, putih solid saat di-scroll
+(function () {
+  const nav = document.querySelector('.pv-hero-pill');
+  if (!nav) return;
+
+  const toggle = () => {
+    nav.classList.toggle('is-scrolled', window.scrollY > 40);
+  };
+
+  window.addEventListener('scroll', toggle, { passive: true });
+  toggle(); // jalankan sekali saat halaman dibuka
+})();

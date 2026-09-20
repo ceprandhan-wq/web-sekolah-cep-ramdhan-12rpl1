@@ -14,7 +14,7 @@ class GuruController extends Controller
         $guru = Guru::with('jurusan')->get();
         $jurusans = Jurusan::all();
 
-        return view('dashboard', compact('guru', 'jurusans'));
+        return view('home/dashboard', compact('guru', 'jurusans'));
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class GuruController extends Controller
 
         Guru::create($validated);
 
-        return redirect()->route('dashboard')->with('success', 'Data guru berhasil ditambahkan.');
+        return redirect()->route('home/dashboard')->with('success', 'Data guru berhasil ditambahkan.');
     }
 
     public function update(Request $request, Guru $guru)
@@ -69,7 +69,7 @@ class GuruController extends Controller
 
         $guru->update($validated);
 
-        return redirect()->route('dashboard')->with('success', 'Data guru berhasil diperbarui.');
+        return redirect()->route('home/dashboard')->with('success', 'Data guru berhasil diperbarui.');
     }
 
     public function destroy(Guru $guru)
@@ -79,6 +79,6 @@ class GuruController extends Controller
         }
         $guru->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Data guru berhasil dihapus.');
+        return redirect()->route('home/dashboard')->with('success', 'Data guru berhasil dihapus.');
     }
 }
